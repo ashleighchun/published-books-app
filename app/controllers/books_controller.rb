@@ -2,7 +2,7 @@ class BooksController < ApplicationController
 
   get '/books' do
     redirect '/login' if !logged_in?
-    @books = current_reader.books
+    @books = Book.all
     erb :'books/books'
   end
 

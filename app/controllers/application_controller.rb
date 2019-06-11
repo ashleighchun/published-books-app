@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
       end
 
       def current_reader
-        Reader.find(session[:reader_id])
+        Reader.find_by_id(session[:reader_id])
       end
     end
 end

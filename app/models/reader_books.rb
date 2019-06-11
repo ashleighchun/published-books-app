@@ -1,4 +1,4 @@
-class ReaderBooks < ActiveRecord::Base
+class ReaderBook < ActiveRecord::Base
   belongs_to :reader
-  belongs_to :books
-end 
+  belongs_to :book
+end

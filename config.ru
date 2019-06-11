@@ -7,8 +7,5 @@ end
 use Rack::MethodOverride #allows us to use patch and delete
 use ReadersController
 use BooksController
-use PublishersController
+use PublishersController #synonym for use is 'mount' it mounts the controller
 run ApplicationController
-#map('/') {run ApplicationController}
-#map('/readers') {run ReadersController}
-#map('/books') {run BooksController}

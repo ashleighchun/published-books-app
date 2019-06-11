@@ -1,5 +1,5 @@
 
-<h1> Welcome, <%= current_reader.name %></h1> #look at last thursday's lecture
+<h1> Welcome, <%= current_reader.name %></h1>
 <h2> Here are your books </h2>
 <ul>
 <% @books.each do |book| %>
@@ -8,3 +8,7 @@
   </li>
 <% end %>
 </ul>
+
+#books need to be links to books show Page
+#at show page need edit and delete capability
+#this page needs add book button that leads you to new.erb

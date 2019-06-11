@@ -7,7 +7,7 @@ class ReadersController < ApplicationController
 
   get '/signup' do
      if logged_in?
-       redirect '/tweets'
+       redirect '/books'
      else
        erb :'readers/signup'
      end
@@ -29,12 +29,12 @@ class ReadersController < ApplicationController
   end
 
   post '/login' do
-    @reader = Reader.find_by(:name => params[:name])
-    if @reader && @reader.authenticate(params[:password])
-      session[:reader_id] = @reader.id
+    reader = Reader.find_by(:name => params[:name])
+    if reader && reader.authenticate(params[:password])
+      session["reader_id"] = reader.id
       redirect '/books'
     else
-      redirect '/signup'
+      redirect '/signup' #should this redirect to login?
     end
   end
 

@@ -9,6 +9,6 @@ use ReadersController
 use BooksController
 use PublishersController
 run ApplicationController
-map('/') {run ApplicationController}
-map('/readers') {run ReadersController}
-map('/books') {run BooksController}
+#map('/') {run ApplicationController}
+#map('/readers') {run ReadersController}
+#map('/books') {run BooksController}

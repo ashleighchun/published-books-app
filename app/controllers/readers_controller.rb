@@ -4,6 +4,7 @@ class ReadersController < ApplicationController
     @reader = Reader.find_by_slug(params[:slug])
     erb :'readers/show'
   end
+
   get '/signup' do
      if logged_in?
        redirect '/tweets'

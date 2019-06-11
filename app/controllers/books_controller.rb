@@ -55,7 +55,7 @@ class BooksController < ApplicationController
             redirect to "/books/#{@book.id}/edit"
           end
         else
-          redirect to 'books'
+          redirect to '/books'
         end
       end
     end

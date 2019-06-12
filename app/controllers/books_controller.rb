@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   end
 
 
-  get '/books/new' do #-------this has to come first because it prevents a false match. when it gets a request it looks for a route starting from the top and going down. if it gets to id before new it will assume new is the id and will go into show instead of new
+  get '/books/new' do #-------new first prevents a false match. when it gets a request it looks for a route starting from the top and going down. if it gets to id before new it will assume new is the id and will go into show instead of new
     redirect '/login' if !logged_in?
     erb :'books/new'
   end
@@ -21,17 +21,9 @@ class BooksController < ApplicationController
     if params[:title] == ""
       redirect to "/books/new"
     else
-      @book = current_reader.books.build(title: params[:title])
-      if @book.save
-        if publisher
-        
-        #if publisher exists then connect it to this book, publishers book need to include this book and the book needs to know this publishers
-        #if publisher doesnt exist make the publisher and make the connections
-        #use association collections as much as possible
-        redirect to "/books/#{@book.id}"
-      else
-        redirect to "/books/new"
-      end
+      book = current_reader.books.build(title: params[:title])
+      book.publisher << Publisher.find_or_create_by(name: params[:publisher][:name]) if !params[:publisher][:name].empty?
+      redirect to "/books"
     end
   end
 

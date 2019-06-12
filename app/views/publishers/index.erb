@@ -1,0 +1,11 @@
+<h2>Publishers List</h2>
+<p>Select the publisher name to see all books by the publisher</p>
+
+<ul>
+<%@publishers.each do |publisher|%>
+  <li><a href="/publishers/<%=publisher.id%>"><%= publisher.name%></a></li>
+<%end%>
+</ul><br><br>
+
+<a href="/welcome">Home</a><br>      
+<a href="/logout">Log out</a>

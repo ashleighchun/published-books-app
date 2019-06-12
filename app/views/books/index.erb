@@ -1,6 +1,6 @@
 
 <h1> Welcome, <%= current_reader.name %></h1>
-<h2> Here are your books </h2>
+<h2> Here are your books: </h2>
 <ul>
 <% @books.each do |book| %> <!--books need to be hrefs to books show Page-->
   <li>
@@ -12,9 +12,9 @@
 
 
 
-<button type="button"> Edit a Book </button> <!--or href? to show page with edit or delete-->
-<a href="/books/new"> Add a New Book </a>
-<a href="/books/new"> Add a New Book </a>
-<a href="/publishers/index"> See all of your books from a given publisher </a>
-<a href="/welcome">Home</a>
+
+<a href="/books/new"> Add a New Book </a><br>
+<a href="/books/new"> Add a New Book </a><br>
+<a href="/publishers/index"> See all of your books from a given publisher </a><br>
+<a href="/welcome">Home</a><br>
 <a href="/logout">Log out</a>

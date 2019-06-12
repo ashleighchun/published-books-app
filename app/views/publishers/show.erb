@@ -1,0 +1,11 @@
+<h2>Publisher: <%= @publisher.name %></h2>
+
+<h4>Books:</h4>
+<l>
+  <% @books.each do |book| %>
+    <li><a href="/books/<%=book.id%>"><%= book.title %></a></li>
+  <% end %>
+</ul><br>
+
+<a href="/welcome">Home</a>
+<a href="/logout">Log out</a>

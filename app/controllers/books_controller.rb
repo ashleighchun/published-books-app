@@ -22,7 +22,8 @@ class BooksController < ApplicationController
       redirect to "/books/new"
     else
       book = current_reader.books.build(title: params[:title])
-      book.publisher << Publisher.find_or_create_by(name: params[:publisher][:name]) if !params[:publisher][:name].empty?
+      book.publisher = Publisher.find_or_create_by(name: params[:publisher])
+      book.save
       redirect to "/books"
     end
   end

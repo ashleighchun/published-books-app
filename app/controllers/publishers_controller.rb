@@ -2,8 +2,8 @@ class PublishersController < ApplicationController
 
   get '/publishers' do
     if logged_in?
-      @books = current_book.publishers.uniq
-      erb :'books/publishers'
+      @publishers = current_reader.publishers
+      erb :'publishers/index'
     else
       redirect '/login'
     end
@@ -11,11 +11,13 @@ class PublishersController < ApplicationController
 
   get '/publishers/:id' do
     if logged_in?
+
       @publisher = Publisher.find_by_id(params[:id])
-      @books = @publisher.books.select { |dream| dream.user_id == current_user.id}
+      @books = current_reader.books.where("publisher_id = '#{params[:id]}'")
+
       erb :'books/show'
     else
       redirect '/login'
-    end 
+    end
   end
 end

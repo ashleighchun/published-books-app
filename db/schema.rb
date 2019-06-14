@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "publisher_id"
   end
 
-  create_table "publishers", force: :cascade do |t|
-    t.string "name"
+  create_table "books_readers", id: false, force: :cascade do |t|
+    t.integer "reader_id", null: false
+    t.integer "book_id", null: false
   end
 
-  create_table "reader_books", force: :cascade do |t|
-    t.integer "reader_id"
-    t.integer "book_id"
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "readers", force: :cascade do |t|

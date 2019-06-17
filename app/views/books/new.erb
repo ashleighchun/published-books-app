@@ -1,14 +1,28 @@
 <h2> Add a New Book! </h2>
 <form action='/books' method="post">
 
-<label>Book Title:</label>
-<input type="text" name="title"><br>
-<label>Book Publisher:</label>
-<input type="text" name="publisher"><br>
+<label for="book[publisher_id]">Choose an existing publisher</label>
+<select name="book[publisher_id]">
+<option selected="selected"></option>
+<% @books.each do |book| %>
+  <option value="<%= book.id %>"><%= book.name %></option>
+<% end %>
 
-<label>Add this book to your list!</label>
-<input type="submit" name="submit" id="submit">
+</select>
+<br>
+<br>
+<label for="book[title]">Enter the Book Title:</label>
+<input type="text" name="book[title]">
+<br>
+<label for="book[publisher]">Enter the Book Publisher's Name:</label>
+<input type="text" name="book[publisher]"><br>
+<br>
+<label for="book[summary]">Enter the Book's summary:</label>
+<input type="text" name="book[summary]"><br>
+<br>
+<input type="submit" value="Add this Book!">
 </form><br>
-
-<a href="/">Home</a>
-<a href="/logout">Log out</a>
+<br>
+<a href="/books"><input type="submit" value="Return to Books Index"></a>
+<br>
+<a href="/publishers"><input type="submit" value="Return to Publishers Index"></a>

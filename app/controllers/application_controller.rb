@@ -12,11 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    if logged_in?
-      redirect to '/books'
-    else 
-      erb :welcome
-    end
+    erb :welcome
   end
 
   helpers do
@@ -25,11 +21,14 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_reader
-      @reader ||= Reader.find_by_id(session[:reader_id])
+      if logged_in?
+        @reader ||= Reader.find_by_id(session[:reader_id])
+      end
+      @current_reader
     end
 
     def redirect_if_not_logged_in
-      redirect "/login" if !logged_in?
+      redirect "/sessions/login" if !logged_in?
     end
   end
 end

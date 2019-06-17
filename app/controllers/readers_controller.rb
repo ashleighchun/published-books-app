@@ -15,7 +15,6 @@ class ReadersController < ApplicationController
 
    post '/signup' do
     if params[:name] == "" || params[:email] == "" || params[:password] ==""
-      flash[:message] = "*All fields required*"
       redirect "/signup"
     else
       @reader = Reader.create(name: params[:name], email: params[:email], password: params[:password])
@@ -35,8 +34,7 @@ class ReadersController < ApplicationController
       session["reader_id"] = reader.id
       redirect '/books'
     else
-      flash[:message] = "*Valid email and password required*"
-      redirect '/login'
+      redirect '/signup' #should this redirect to login?
     end
   end
 

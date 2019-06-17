@@ -21,14 +21,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_reader
-      if logged_in?
-        @reader ||= Reader.find_by_id(session[:reader_id])
-      end
-      @current_reader
+      @reader ||= Reader.find_by_id(session[:reader_id])
     end
 
     def redirect_if_not_logged_in
-      redirect "/sessions/login" if !logged_in?
+      redirect "/login" if !logged_in?
     end
 
     def error_check

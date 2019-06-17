@@ -31,5 +31,8 @@ class ApplicationController < Sinatra::Base
     def error_check
      @errors = session.delete(:errors)
     end
+    def log_errors(obj)
+      session[:errors] = obj.errors.to_a if obj.errors.any?
+    end
   end
 end

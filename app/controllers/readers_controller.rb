@@ -1,8 +1,8 @@
 class ReadersController < ApplicationController
 
-  get 'readers/:slug' do
-    @reader = Reader.find_by_slug(params[:slug])
-    erb :'readers/show'
+  get '/readers' do
+    @reader = Reader.all
+    erb :'readers/index'
   end
 
   get '/signup' do
@@ -21,26 +21,5 @@ class ReadersController < ApplicationController
       session[:reader_id] = @reader.id
       redirect '/books'
     end
-  end
-
-  get '/login' do
-    redirect '/books' if logged_in?
-    erb :'readers/login'
-  end
-
-  post '/login' do
-    reader = Reader.find_by(:name => params[:name])
-    if reader && reader.authenticate(params[:password])
-      session["reader_id"] = reader.id
-      redirect '/books'
-    else
-      redirect '/signup' #should this redirect to login?
-    end
-  end
-
-  get '/logout' do
-    redirect '/books' if !logged_in?
-    session.clear
-    redirect '/login'
   end
 end

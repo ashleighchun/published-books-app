@@ -3,13 +3,11 @@
 <h2> Here are your books: </h2>
 <ul>
 <% @books.each do |book| %> <!--books need to be hrefs to books show Page-->
-  <li><a href="/books/<%= book.id %>"> <%= book.title%></a></li>
+  <li>
+    <%= book.title%>
+  </li>
 <% end %>
-</ul><br>
-
-<% if @books.empty? %>
-  <p>You currently do not have any books.</p>
-<% end %><br>
+</ul>
 
 
 

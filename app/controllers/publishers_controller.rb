@@ -14,7 +14,7 @@ class PublishersController < ApplicationController
 
       @publisher = Publisher.find_by_id(params[:id])
       @books = current_reader.books.where("publisher_id = '#{params[:id]}'")
-
+  
       erb :'books/show'
     else
       redirect '/login'

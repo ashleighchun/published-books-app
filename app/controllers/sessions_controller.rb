@@ -1,25 +1,26 @@
 class SessionsController<ApplicationController
-  get '/sessions/login' do
-    if logged_in?
-      redirect to '/welcome'
-    else
-      erb :'sessions/login'
-    end
+  get '/login' do
+    error_check
+    erb :"sessions/login"
   end
 
-  post '/sessions/login' do
+  post '/login' do
     user = User.find_by(name: params[:name])
 
     if reader && reader.authenticate(params[:password])
       session[:reader_id] = reader.id
       redirect to '/books'
+    elsif reader
+      session[:errors] = ["Please enter a valid password"]
+      redirect "/login"
     else
-      redirect to '/readers/signup'
+      session[:errors] = ["Please enter a valid username"]
+      redirect "/login"
     end
   end
 
-  get '/sessions/logout' do
+  get '/logout' do
     session.clear
-    redirect to '/'
+    redirect to '/login'
   end
 end

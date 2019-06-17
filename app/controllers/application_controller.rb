@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
+    use Rack::Flash
   end
 
   get "/" do
@@ -20,7 +21,7 @@ class ApplicationController < Sinatra::Base
       end
 
       def current_reader
-        @reader ||= Reader.find_by_id(session[:reader_id]) 
+        @reader ||= Reader.find_by_id(session[:reader_id])
       end
     end
 end

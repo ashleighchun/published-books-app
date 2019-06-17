@@ -18,7 +18,7 @@ class ReadersController < ApplicationController
       redirect "/signup"
     else
       @reader = Reader.create(name: params[:name], email: params[:email], password: params[:password])
-      session[:reader_id] = @reader.id
+      session[:reader_id] = reader.id
       redirect '/books'
     end
   end
@@ -31,8 +31,8 @@ class ReadersController < ApplicationController
   post '/login' do
     reader = Reader.find_by(:name => params[:name])
     if reader && reader.authenticate(params[:password])
-      session[:reader_id] = reader.id
-      redirect '/books/index'
+      session["reader_id"] = reader.id
+      redirect '/books'
     else
       redirect '/login'
     end

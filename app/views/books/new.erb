@@ -1,29 +1,27 @@
 <h2> Add a New Book! </h2>
-<form action='/books' method="post">
 
-
+<form action="/books" method="post">
 <br>
 <br>
-<label for="book[title]">Enter the Book Title:</label>
-<input type="text" name="book[title]">
-<br>
-
-<label for="book[publisher]">Enter the Book Publisher's Name:</label>
-<input type="text" name="book[publisher]"><br>
+Enter the Book Title:
+<input type="text" name="title">
 <br>
 
-<label for="book[summary]">Enter the Book's summary:</label>
-<input type="text" name="book[summary]">
+Enter the Book Publisher's Name:
+<input type="text" name="publisher"><br>
 <br>
-<h2>OR </h2>
+Or choose an existing publisher:
+<% if !@publishers.empty? %>
+  <% @publishers.each do |publisher| %>
+    <input type="checkbox" name="publisher_id" id="<%= publisher.id %>"> value="<%= publisher.id %>"><%= publisher.name %></input>
+  <% end %>
+  <% else %>
+    <p> There are no publishers currently listed</p>
+  <% end %>
 <br>
-<label for="book[publisher_id]">Choose an existing publisher</label>
-<select name="book[publisher_id]">
-<option selected="selected"></option>
-<% @books.each do |book| %>
-  <option value="<%= book.id %>"><%= book.publisher %></option>
-<% end %>
-</select>
+
+Enter the Book's summary:
+<input type="text" name="summary">
 <br>
 <input type="submit" value="Add this Book!">
 </form><br>

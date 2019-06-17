@@ -13,6 +13,15 @@
 <% end %>
 </ol>
 
+<% if @books.empty? %>
+  <p> You currently do not have any books. </p>
+<% end %>
+<br>
 
 
-<a href="/books"><input type="button" value="Return to Book Index"</a>
+
+<a href="/new"><input type="button" value="Add a new book!"</a>
+<br>
+<a href="/publishers"> <input type="button" value="See all of your books from a given publisher" </a>
+<br>
+<a href="/logout">Log out</a>

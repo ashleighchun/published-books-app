@@ -10,14 +10,11 @@ class PublishersController < ApplicationController
   end
 
   get '/publishers/:id' do
-    if logged_in?
-
-      @publisher = Publisher.find_by_id(params[:id])
-      @books = current_reader.books.where("publisher_id = '#{params[:id]}'")
-  
-      erb :'books/show'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+    error_check
+    @publisher = Publisher.find_by_id(params[:id])
+    @books = current_reader.books.where("publisher_id = '#{params[:id]}'")
+    erb :'books/show'
   end
+
 end

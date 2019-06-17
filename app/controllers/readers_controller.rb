@@ -22,4 +22,23 @@ class ReadersController < ApplicationController
       redirect '/books'
     end
   end
+
+  get '/login' do
+    redirect '/books' if logged_in?
+    erb :login
+  end
+
+  post '/login' do
+    reader = Reader.find_by(:name => params[:name])
+    if reader && reader.authenticate(params[:password])
+      session[:reader_id] = reader.id
+      redirect '/books/index'
+    else
+      redirect '/login'
+    end
+  end
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
 end

@@ -2,16 +2,11 @@
 <h1> Welcome, <%= current_reader.name %></h1>
 <h2> Here are all of the books you have added: </h2>
 <br>
-<ol>
+
 <% @books.each do |book| %>
-  <li><h2><a href="/books/<%= book.id %>/edit"><%= book.title %></a></h2></li>
-  <ul>
-    <li> Publisher: <%= book.publisher %></li>
-    <li> Summary: <%= book.summary %></li>
-  </ul>
-<br>
+  <li><p><a href="/books/<%= book.id %>"><%= book.title %></a></p></li>
 <% end %>
-</ol>
+
 
 <% if @books.empty? %>
   <p> You currently do not have any books. </p>
@@ -20,7 +15,7 @@
 
 
 
-<a href="/new"><input type="button" value="Add a new book!"</a>
+<a href="/books/new"><input type="button" value="Add a new book!"</a>
 <br>
 <a href="/publishers"> <input type="button" value="See all of your books from a given publisher" </a>
 <br>

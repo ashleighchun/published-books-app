@@ -14,18 +14,18 @@ class BooksController < ApplicationController
 
 
   get '/books/new' do  #-------new first prevents a false match. when it gets a request it looks for a route starting from the top and going down. if it gets to id before new it will assume new is the id and will go into show instead of new
-    redirect '/login' if !logged_in?
+    redirect_if_not_logged_in
     erb :'books/new'
   end
 
   get '/books/:id' do
-    redirect '/login' if !logged_in?
+    redirect_if_not_logged_in
     @book = Book.find_by_id(params[:id])
     erb :'books/show'
   end
 
   post '/books' do #confirmed correct
-    redirect '/login' if !logged_in?
+    redirect_if_not_logged_in
     if params[:title] == ""
       redirect to "/books/new"
     else
@@ -47,11 +47,7 @@ class BooksController < ApplicationController
 
 
   patch '/books/:id' do
-    #book = current_reader.books.find_by_id(params[:id])
-    #book.update(params[:book])
-    #log_errors(book)
-    #redirect "/books/#{book.id}"
-    redirect '/login' if !logged_in?
+    redirect_if_not_logged_in
     if params[:title] == ""
       redirect to "/books/#{params[:id]}/edit"
     else
@@ -69,9 +65,9 @@ class BooksController < ApplicationController
   end
 
   delete '/books/:id/delete' do
-    redirect '/login' if !logged_in?
+    redirect_if_not_logged_in
     @book = Book.find_by_id(params[:id])
-    if @book && @book.reader == current_reader
+    if @book && @book.readers == current_reader
       @book.delete
     end
     redirect to '/books'

@@ -20,7 +20,7 @@ class ReadersController < ApplicationController
   end
 
   get '/login' do
-    redirect '/books' if logged_in?
+    redirect_if_not_logged_in
     erb :'readers/login'
   end
 

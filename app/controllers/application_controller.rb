@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_reader
-      @reader = Reader.find_by_id(session[:reader_id]) if session[:reader_id]#memoization
+      @reader ||= Reader.find_by_id(session[:reader_id]) #memoization
     end
 
     def redirect_if_not_logged_in
@@ -31,6 +31,7 @@ class ApplicationController < Sinatra::Base
     def error_check
      @errors = session.delete(:errors)
     end
+
     def log_errors(obj)
       session[:errors] = obj.errors.to_a if obj.errors.any?
     end

@@ -1,6 +1,6 @@
 <p>Book Title: <%= @book.title %>
-<p>Publisher: <%= @book.publisher %>
-<p>Plot Summary: <%= @book.summary %>  
+<p>Publisher: <%= @book.publisher.name %>
+<p>Plot Summary: <%= @book.summary %>
 
 <form method="post" action="/books/<%=@book.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">

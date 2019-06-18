@@ -39,22 +39,24 @@ class BooksController < ApplicationController
 
 
   get '/books/:id/edit' do
-    reader = Book.find_by_id(params[:id]).reader
-    if reader.id == current_reader.id
-      @book = Book.find_by_id(params[:id])
-      erb :'books/edit'
-    else
-      redirect to '/login'
-    end
+    redirect_if_not_logged_in
+    @book = current_reader.books.find_by_id(params[:id])
+    redirect to '/books' if !@book
+    erb :"books/edit"
   end
 
+
   patch '/books/:id' do
+    #book = current_reader.books.find_by_id(params[:id])
+    #book.update(params[:book])
+    #log_errors(book)
+    #redirect "/books/#{book.id}"
     redirect '/login' if !logged_in?
     if params[:title] == ""
       redirect to "/books/#{params[:id]}/edit"
     else
       @book = Book.find_by_id(params[:id])
-      if @book && @book.reader == current_reader
+      if @book && @book.readers == current_reader
         if @book.update(title: params[:title], publisher: params[:publisher])
           redirect to "/books/#{@book.id}"
         else

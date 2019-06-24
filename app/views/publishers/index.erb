@@ -2,7 +2,7 @@
 <p>Select the publisher name to see all of your books by the publisher</p>
 
 <ul>
-<%@publishers.each do |publisher|%>
+<%@publishers.map.uniq.each do |publisher|%>
   <li><a href="/publishers/<%=publisher.id%>"><%= publisher.name%></a></li>
 <%end%>
 </ul><br><br>

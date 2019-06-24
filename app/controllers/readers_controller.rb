@@ -6,6 +6,7 @@ class ReadersController < ApplicationController
   end
 
   get '/signup' do
+    redirect '/books' if logged_in?
     erb :'readers/signup'
   end
 
@@ -20,20 +21,21 @@ class ReadersController < ApplicationController
   end
 
   get '/login' do
-    redirect_if_not_logged_in
+    redirect '/books' if logged_in?
     erb :'readers/login'
   end
 
   post '/login' do
-    reader = Reader.find_by(:name => params[:name])
-    if reader && reader.authenticate(params[:password])
-      session["reader_id"] = reader.id
+    @reader = Reader.find_by(:name => params[:name])
+    if @reader && @reader.authenticate(params[:password])
+      session[:reader_id] = @reader.id
       redirect '/books'
     else
-      redirect '/login'
+      redirect '/signup'
     end
   end
   get '/logout' do
+    redirect_if_not_logged_in
     session.clear
     redirect '/login'
   end

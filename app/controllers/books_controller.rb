@@ -25,14 +25,14 @@ class BooksController < ApplicationController
     erb :'books/show'
   end
 
-  post '/books' do #confirmed correct
+  post '/books' do
     redirect_if_not_logged_in
-    if params[:title] == ""
+    if params[:book][:title] == ""
       redirect to "/books/new"
     else
-      @book = current_reader.books.build(title: params[:title])
-      @book.publisher = Publisher.find(name: params[:publisher])
-      @book.save
+      book = current_reader.books.build(params[:book])
+      book.publisher = Publisher.find_or_create_by(name: params[:publisher][:name]) if !params[:publisher][:name].empty?
+      book.save
       redirect to "/books"
     end
   end
@@ -66,9 +66,7 @@ class BooksController < ApplicationController
   delete '/books/:id/delete' do
     redirect_if_not_logged_in
     @book = Book.find_by_id(params[:id])
-    if @book && @book.readers == current_reader
-      @book.delete
-    end
+    @book.delete
     redirect to '/books'
   end
 end

@@ -25,3 +25,19 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/ashlei
 
 Code of Conduct
 Everyone interacting in the MisterFitness project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
+
+
+edit books view
+  change title  
+  pick different publisher or add new publisher
+
+
+
+edit publishers view
+see all Publishers
+  edit publishers
+  delete?
+
+
+  show all publishers
+  edit or delete publisher

@@ -3,12 +3,21 @@
 <form action="/books" method="post">
 <br>
 <br>
-Enter the Book Title:
-<input type="text" name="title">
+<label>Enter the Book Title:</label><br>
+<input type="text" name="book[title]" id="book_title">
+<br>
+<br>
+<br>
+<label>Choose an existing publisher:</label><br>
+<%@publishers.each do |publisher|%>
+  <input type="checkbox" name="book[publisher_id]" id="<%=publisher.id%>" value="<%=publisher.id%>"><%=publisher.name%></input>
+<%end%><br>
+<br>
+<label>Or, create a new publisher:</label><br>
+<label>name:</label>
+<input type="text" name="publisher[name]" id="publisher_name"></input>
 <br>
 
-Enter the Book Publisher's Name:
-<input type="text" name="publisher"><br>
 
 
 <input type="submit" value="Add this Book!">

@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
 
   get '/books' do
-
     if logged_in?
       @reader = current_reader
       @books = current_reader.books
@@ -54,10 +53,14 @@ class BooksController < ApplicationController
       redirect to "/books/#{params[:id]}/edit"
     else
       @book = Book.find_by_id(params[:id])
-      @book.update(params["book"])
-      if !params["publisher"]["name"].empty?
-        publisher = Publisher.find_or_create_by(name: params["publisher"]["name"])
-        @book.update(publisher: publisher)
+      if current_reader.books.find_by_id(@book.id)
+        @book.update(params["book"])
+        if !params["publisher"]["name"].empty?
+          publisher = Publisher.find_or_create_by(name: params["publisher"]["name"])
+          @book.update(publisher: publisher)
+        else
+          redirect to "/books"
+        end
       end
       redirect to "books/#{@book.id}"
     end
@@ -66,7 +69,9 @@ class BooksController < ApplicationController
   delete '/books/:id/delete' do
     redirect_if_not_logged_in
     @book = Book.find_by_id(params[:id])
-    @book.delete
+    if current_reader.books.find_by_id(@book.id)
+      @book.delete
+    end
     redirect to '/books'
   end
 end

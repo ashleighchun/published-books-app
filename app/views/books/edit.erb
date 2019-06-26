@@ -5,7 +5,7 @@
   <label>Title:</label>
   <input type="text" name="book[title]" value="<%= @book.title %>"></input><br>
   <label>Choose an existing Publisher:</label><br>
-  <% @publishers.each do |publisher| %>
+  <% @publishers.map.uniq.each do |publisher| %>
   <input type="radio" name="book[publisher_id]" id="<%=publisher.id%>" value="<%=publisher.id%>" <%='checked' if @book.publisher == publisher %>><%=publisher.name%></input>
   <% end %><br>
 
@@ -17,5 +17,5 @@
   <input type="submit" value="submit">
 </form>
 <br>
-<a href="/books">Return to Books Index</a>
+<a href="/books">Return to Books Index</a><br>
 <a href="/logout">Log out</a>

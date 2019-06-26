@@ -14,9 +14,13 @@ class ReadersController < ApplicationController
     if params[:name] == "" || params[:email] == "" || params[:password] ==""
       redirect "/signup"
     else
-      @reader = Reader.create(name: params[:name], email: params[:email], password: params[:password])
-      session[:reader_id] = @reader.id
-      redirect '/books'
+      @reader = Reader.new(name: params[:name], email: params[:email], password: params[:password])
+      if @reader.save
+        session[:reader_id] = @reader.id
+        redirect '/books'
+      else
+        redirect "/signup"
+      end
     end
   end
 

@@ -27,13 +27,5 @@ class ApplicationController < Sinatra::Base
     def redirect_if_not_logged_in
       redirect "/login" if !logged_in?
     end
-
-    def error_check
-     @errors = session.delete(:errors)
-    end
-
-    def log_errors(obj)
-      session[:errors] = obj.errors.to_a if obj.errors.any?
-    end
   end
 end
